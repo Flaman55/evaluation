@@ -208,6 +208,7 @@ sigma_a = float(${sigmaA})
 sigma_b = float(${sigmaB})
 base_sigma = 0.5
 show_naturals = False
+await pyodide.globals.set("js_showNaturals", showNaturals);
 
 def detect_destructive_minima(t_values, amplitudes_dict, sigma_base=0.5, eps=0.05, threshold=-1.5):
     results = []

@@ -195,9 +195,8 @@
       const zeros = await fetchZerosFromFile(tMin, tMax);
       await pyodide.globals.set("js_zeros", zeros);
       const preparedPrimes = await fetchPrimesFromFile(numPrimes);
-      const js_showNaturals = await toggleNaturals();
       await pyodide.globals.set("preparedPrimes", preparedPrimes);
-      await pyodide.globals.set("js_showNaturals", showNaturals);
+      await pyodide.globals.set("show_naturals", showNaturals);
       
       exportSection.style.display = "none";
 
@@ -209,7 +208,7 @@ from sympy import primerange
 sigma_a = float(${sigmaA})
 sigma_b = float(${sigmaB})
 base_sigma = 0.5
-show_naturals = showNaturals
+show_naturals = show_naturals
 
 def detect_destructive_minima(t_values, amplitudes_dict, sigma_base=0.5, eps=0.05, threshold=-1.5):
     results = []

@@ -208,7 +208,7 @@ from sympy import primerange
 sigma_a = float(${sigmaA})
 sigma_b = float(${sigmaB})
 base_sigma = 0.5
-show_naturals = bool(${showNaturals})
+show_naturals = False
 
 def detect_destructive_minima(t_values, amplitudes_dict, sigma_base=0.5, eps=0.05, threshold=-1.5):
     results = []
@@ -265,7 +265,6 @@ if sigma_a != base_sigma:
 if sigma_b != base_sigma and sigma_b != sigma_a:
     colors[sigma_b] = "#FF8C00"  # DarkOrange
     
-naturalne = True
 t_values = np.arange(int(${tMin}), int(${tMax}), 0.01)
 
 amplitudes_dict = {}

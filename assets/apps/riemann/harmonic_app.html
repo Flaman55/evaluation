@@ -140,7 +140,7 @@
     let pyodideReady = false;
     let lastCSV = "";
     let lastImageURL = "";
-    let showNaturals = true;
+    let showNaturals = false;
 
     function toggleNaturals() {
       showNaturals = !showNaturals;
@@ -195,6 +195,7 @@
       const zeros = await fetchZerosFromFile(tMin, tMax);
       await pyodide.globals.set("js_zeros", zeros);
       const preparedPrimes = await fetchPrimesFromFile(numPrimes);
+      const js_showNaturals = await toggleNaturals();
       await pyodide.globals.set("preparedPrimes", preparedPrimes);
       await pyodide.globals.set("js_showNaturals", showNaturals);
       

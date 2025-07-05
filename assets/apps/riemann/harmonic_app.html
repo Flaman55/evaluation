@@ -443,30 +443,42 @@ csv_data + "###" + output
 
   doc.addImage(img, "PNG", x, y, imgWidth, imgHeight);
 
-  // STRONA 2: dane + licencja
+  // STRONA z pełnymi zerami i minimami operatora
   doc.addPage("landscape");
-  doc.setFontSize(14);
-  doc.text("Harmonic Interference Report – Riemann Hypothesis", 10, 15);
+  doc.setFontSize(12);
+  doc.text("Detailed Numerical Data", 10, 15);
+  
+  // Zera Riemanna (LMFDB)
   doc.setFontSize(10);
-  doc.text("Behavior of prime harmonic interference near the critical line ℜ(s) = 0.5.", 10, 22);
-
-  // Dodaj datę
-  const today = new Date();
-  const formattedDate = today.toISOString().slice(0, 10); // yyyy-mm-dd
-  doc.text(`Generated on: ${formattedDate}`, 10, 29);
-
-  let yPos = 35;
-  const rows = lastCSV.trim().split("\n").slice(1); // bez nagłówka
-
-  doc.setFontSize(9);
-  rows.forEach(row => {
-    if (yPos > 190) {
+  doc.text("Riemann Zeta Zeros (from LMFDB):", 10, 22);
+  let zY = 28;
+  zeros.forEach(z => {
+    if (zY > 190) {
       doc.addPage("landscape");
-      yPos = 15;
+      zY = 15;
     }
-    doc.text(row, 10, yPos);
-    yPos += 6;
+    doc.text(`t = ${z.toFixed(6)}`, 10, zY);
+    zY += 5;
   });
+  
+  // Zera operatora
+  zY += 5;
+  if (zY > 190) {
+    doc.addPage("landscape");
+    zY = 15;
+  }
+  doc.text("Detected Destructive Interference (Operator minima):", 10, zY);
+  zY += 6;
+  
+  destructive_results.forEach(([t, val, label, spread]) => {
+    if (zY > 190) {
+      doc.addPage("landscape");
+      zY = 15;
+    }
+    doc.text(`t = ${t.toFixed(3)}, A = ${val.toFixed(3)}, type: ${label}, spread = ${spread.toFixed(3)}`, 10, zY);
+    zY += 5;
+  });
+
 
   // Licencja na dole
   yPos += 10;
